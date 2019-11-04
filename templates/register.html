@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+</head>
+<body>
+    <form action="/register" method="post">
+        <p>
+            <input type="text" placeholder="6-12位字母数字组成" name="username" onchange=cg1();>*用户名 <div></div>
+        </p>
+        <p>
+            <input type="password" name="password"> *密码
+        </p>
+        <p>
+            <input type="password" name="apwd" onchange=cg2();> *确认密码<div></div>
+        </p>
+        <p>
+            <input type="submit" name="subm" value="注册" onclick=subt();>
+        </p>
+    </form>
+    <script>
+        var pt = /^\w{6,12}$/;
+        var divx = document.getElementsByTagName('div');
+        var div1 = divx[0];
+        var div2 = divx[1];
+        var uname = document.getElementsByName('username')[0];
+        function cg1() {
+            if (pt.test(uname.value)) {
+                div1.innerHTML = '用户名可用';
+                div1.style.color='green';
+            }
+            else {
+                div1.style.color='red';
+                div1.innerHTML = '用户名不可用';
+            }
+        }
+    </script>
+    <script>
+        var pwd = document.getElementsByName('password')[0];
+        var apwd1 = document.getElementsByName('apwd')[0];
+        function cg2() {
+            if (pwd.value!==apwd1.value){
+                div2.style.color='red';
+                div2.innerHTML='两次输入的密码不相同';
+            }
+            else{
+                div2.innerHTML=''
+            }
+        }
+    </script>
+    <script>
+        function subt() {
+            if (!uname.value) {
+                alert('请输入用户名');
+                return false
+            } else if (div1.innerText == '用户名不可用') {
+                alert('用户名不正确');
+                return false
+            } else if (!(pwd.value && apwd1.value)) {
+                alert('请输入密码');
+                return false
+            } else if (div2.innerText == '两次输入的密码不相同') {
+                alert('两次输入的密码不相同');
+                return false
+            } else {
+                alert('注册成功');
+                return true
+            }
+        }
+    </script>
+</body>
+</html>
